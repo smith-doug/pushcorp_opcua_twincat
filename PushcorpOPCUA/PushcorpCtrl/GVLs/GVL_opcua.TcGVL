@@ -3,9 +3,14 @@
   <GVL Name="GVL_opcua" Id="{273b9490-171c-4ca8-b282-10eab17b1921}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
+	{attribute 'OPC.UA.DA' := '1'}	
+	stFcuControl	: ST_FcuControl;
 	
 	{attribute 'OPC.UA.DA' := '1'}
 	stSpindleControl	: ST_SpindleControl;
+	
+	{attribute 'OPC.UA.DA' := '1'}	
+	stTestBasic	: ST_TestBasicControl;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

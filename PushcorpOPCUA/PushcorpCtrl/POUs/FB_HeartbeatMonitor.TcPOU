@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_HeartbeatMonitor" Id="{e8b36ecf-1680-4703-ae1e-ebe9f8b4fe16}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_HeartbeatMonitor
+VAR_INPUT
+	CLK	: BOOL;
+	PT	: TIME := T#2S;
+END_VAR
+VAR_OUTPUT
+	Q	: BOOL;
+END_VAR
+VAR
+	fbHbTimeout: TON;
+	bLastHB: BOOL;
+	bFirstBeatRec	: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bLastHB <> CLK THEN
+	bFirstBeatRec := TRUE;
+END_IF
+
+fbHbTimeout(IN:= (bLastHB = CLK), PT:= PT, Q=> Q, ET=> );
+Q := NOT fbHbTimeout.Q AND bFirstBeatRec;
+bLastHB := CLK;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_HeartbeatMonitor">
+      <LineId Id="32" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

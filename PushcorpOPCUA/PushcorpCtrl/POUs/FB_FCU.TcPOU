@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_FCU" Id="{f32ef491-7d80-44e5-9d91-7e3e78c2c9bd}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FCU
+VAR_INPUT
+	SetForce	: REAL;	// Desired force in NM
+	SetPosition	: REAL;	// Desired position in mm
+	SetWeight	: REAL;	// Manually specify the weight, leave 0 if using WeightPayload
+	SetControlMode	: E_FCU_ControlMode := E_FCU_ControlMode.Force;	// Position, Force, Soft Touch
+	WeightPayload	: BOOL;	// Weight the payload now
+END_VAR
+VAR_IN_OUT
+	data	: ST_FCUFLEX;	// Raw data from Ethernet/IP
+END_VAR
+VAR_OUTPUT
+	ActForce	: REAL;	// Actual force in NM
+	ActPos	: REAL;	// Actual position in mm
+	ActWeight	: REAL;	// Actual weight in KG
+	Contact	: BOOL;	// Contact state
+	WeightValid : BOOL; // Is the weight valid or not initialized
+	Error	: UINT;	// 
+END_VAR
+VAR
+	bLastHB	: BOOL;
+	bOk	: BOOL;	
+	fbHbTimeout	: TON;
+	
+	rScaledForce: REAL;
+	rTemp	: REAL;	
+	rMaxPos	: REAL;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Check comms and heartbeat
+bOk := TRUE;	
+fbHbTimeout(IN:= (bLastHB = data.in.Flags.hb), PT:= T#2S, Q=> , ET=> );
+bLastHB := data.in.Flags.hb;
+	
+IF fbHbTimeout.Q OR NOT data.in.Flags.Hostcomm OR NOT data.in.Flags.ToolComm THEN
+	bOk := FALSE;
+END_IF
+
+// Scale data from FCU
+ActForce := data.in.ActForce / 10.0;
+ActPos := data.in.ActPos / 100.0;
+ActWeight := data.in.PayloadWeigth / 100.0;
+// Determine contact
+rMaxPos := data.in.MaxPos  / 100.0;
+Contact := (ActPos >= 2.0 AND ActPos <= rMaxPos - 2.0);
+WeightValid := data.in.Flags.WeightValid;
+
+// Scale and write data to FCU
+data.out.ControlMode := TO_WORD(SetControlMode);
+data.out.CommandForce := TO_INT(SetForce * 10.0);
+data.out.CommandPosition := TO_WORD(SetPosition * 100.0);
+data.out.PayloadWeight := TO_WORD(SetWeight * 100.0);
+data.out.WeighPayloadNow := TO_WORD(WeightPayload);
+
+
+
+Error := TO_UINT(NOT bOk);]]></ST>
+    </Implementation>
+    <Method Name="OpcuaMonitor" Id="{4e58b7d6-1fab-4a4b-9e2f-95c9d1748c8d}">
+      <Declaration><![CDATA[METHOD OpcuaMonitor : BOOL
+VAR_INPUT
+END_VAR
+VAR_IN_OUT
+	Data	: ST_FcuControl;
+END_VAR
+VAR_OUTPUT
+	Error	: BOOL;
+END_VAR
+VAR_INST
+	fbHbMonitor	: FB_HeartbeatMonitor;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbHbMonitor(CLK:= Data.status.input.Heartbeat, PT:= T#2.5S, Q=> );
+
+IF NOT fbHbMonitor.Q THEN
+	// There's no way to simply disable the fcu and it defaults to position mode.  Trying to move to position 0
+	// will cause a significant force
+	Data.input.SetControlMode := E_FCU_ControlMode.SoftTouch;
+	Data.input.SetForce := 0;
+	Data.input.WeighPayloadNow := FALSE;
+	Error := TRUE;
+ELSE
+	Error := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_FCU">
+      <LineId Id="91" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="163" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="38" Count="1" />
+      <LineId Id="195" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="45" Count="1" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="77" Count="1" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="40" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_FCU.OpcuaMonitor">
+      <LineId Id="5" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="26" Count="2" />
+      <LineId Id="23" Count="2" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

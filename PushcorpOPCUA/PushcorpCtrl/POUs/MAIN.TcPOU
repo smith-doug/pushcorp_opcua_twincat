@@ -1,13 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{bb3d809b-8210-48bb-b6ff-5936a2936436}">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="MAIN" Id="{bb3d809b-8210-48bb-b6ff-5936a2936436}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	fbSpindle	: FB_Spindle;
+	fbFcu	: FB_FCU;
+	
+	
+	spin: REFERENCE TO ST_SpindleControl;
+	fcu: REFERENCE TO ST_FcuControl;
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[// Set ref vars for convenience of shorter names 
+spin REF= GVL_opcua.stSpindleControl;
+fcu REF=GVL_opcua.stFcuControl;
+
+// Monitor opcua heartbeat data in a Method for convenience.  This can be easily ignored if calling the FB without opcua 
+fbSpindle.OpcuaMonitor(Data:= spin, Error=> );
+fbSpindle(
+	Enable:= spin.input.Execute, 
+	SetVelo:= spin.input.SetVelo, 
+	data:= GVL_io.Spindle_Full, 
+	ActVelo=> spin.output.ActVelo, 
+	Ready=> spin.output.Ready, 
+	Error=> spin.output.Error);
+
+
+fbFcu.OpcuaMonitor(Data:= fcu, Error=> );
+fbFcu(
+	SetForce:= fcu.input.SetForce, 
+	SetPosition:= fcu.input.SetPosition, 
+	SetWeight:= fcu.input.SetWeight, 
+	SetControlMode:= fcu.input.SetControlMode, 
+	WeightPayload:= fcu.input.WeighPayloadNow, 
+	data:= gvl_io.FCU_Full, 
+	ActForce=> fcu.output.ActForce, 
+	ActPos=> fcu.output.ActPos, 
+	Contact=> fcu.output.Contact,
+	WeightValid=> fcu.output.WeightValid, 
+	Error=> fcu.output.Error);
+	
+// DI0 := DO0, for testing
+GVL_io.DO0 := GVL_opcua.stTestBasic.input.DO0;
+GVL_opcua.stTestBasic.output.DI0 := GVL_io.DI0;]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="62" Count="1" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="53" Count="1" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="17" Count="7" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="25" Count="11" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="58" Count="1" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="60" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

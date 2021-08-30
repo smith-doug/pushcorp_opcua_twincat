@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <DUT Name="ST_SpindleControl" Id="{06a690f3-4ab1-4654-ab47-c229433ed0c7}">
-    <Declaration><![CDATA[TYPE ST_SpindleControl :
+  <DUT Name="ST_FcuControl" Id="{f4f7b709-9537-4936-8cb7-a1716639ff77}">
+    <Declaration><![CDATA[TYPE ST_FcuControl :
 STRUCT
 	status	: ST_OpcuaStatus;
 	
-	input	: ST_SpindleControl_in;
+	input	: ST_FcuControl_in;	
 	
 	{attribute 'OPC.UA.DA.Access' := '1'}
-	output	: ST_SpindleControl_out;
+	output	: ST_FcuControl_out;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

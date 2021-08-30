@@ -17,6 +17,15 @@
     <LibraryReferences>{3b86a8ad-c22f-4af4-9d7a-1069c337270b}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\DoDi\IO\ST_DoDi.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DoDi\IO\ST_DoDi_in.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\FCU\E_FCU_ControlMode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\FCU\IO\ST_FCUFLEX.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -27,6 +36,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\FCU\IO\ST_FCUFLEX_out.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\FCU\ST_FcuControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\FCU\ST_FcuControl_in.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\FCU\ST_FcuControl_out.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\OPCUA\ST_OpcuaStatus.TcDUT">
@@ -62,6 +80,18 @@
     <Compile Include="DUTs\SPINDLE\ST_SpindleControl_out.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Testing\ST_TestBasicControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Testing\ST_TestBasicControl_in.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Testing\ST_TestBasicControl_out.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Testing\ST_TestBasicControl_sub1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GVLs\GVL_io.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -73,17 +103,36 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FB_FCU.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_HeartbeatMonitor.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_Spindle.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_TestBasic.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PRG_OpcuaMonitor.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\DoDi\IO" />
     <Folder Include="DUTs\FCU" />
     <Folder Include="DUTs\FCU\IO" />
+    <Folder Include="DUTs\DoDi" />
     <Folder Include="DUTs\OPCUA" />
     <Folder Include="DUTs\SPINDLE" />
     <Folder Include="DUTs\SPINDLE\IO" />
+    <Folder Include="DUTs\Testing" />
+    <Folder Include="DUTs\Testing\IO" />
     <Folder Include="GVLs" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
@@ -115,8 +164,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{40450F57-0AA3-4216-96F3-5444ECB29763}</v>
@@ -137,13 +186,13 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

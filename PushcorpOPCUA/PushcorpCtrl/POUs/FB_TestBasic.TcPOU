@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_TestBasic" Id="{ab1c2dc1-87be-467c-802a-8b1dc0728c8c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TestBasic
+VAR_INPUT
+	DO0	: BOOL; // Enable the servo	
+END_VAR
+VAR_IN_OUT
+	data	: ST_TestBasic;	// Ethernet IP data
+END_VAR
+VAR_OUTPUT
+	DI0	: BOOL;
+	Ready	: BOOL;
+	Error	: UINT; 
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="OpcuaMonitor" Id="{8a848c2d-bc78-4c2f-9235-a424d0e44822}">
+      <Declaration><![CDATA[METHOD OpcuaMonitor : BOOL
+VAR_INPUT
+END_VAR
+VAR_IN_OUT
+	Data	: ST_SpindleControl;
+END_VAR
+VAR_OUTPUT
+	Error	: BOOL;
+END_VAR
+VAR_INST
+	fbHbMonitor	: FB_HeartbeatMonitor;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbHbMonitor(CLK:= Data.status.input.Heartbeat, PT:= T#2.5S, Q=> );
+
+IF NOT fbHbMonitor.Q THEN
+	MEMSET(ADR(Data.input), 0, SIZEOF(Data.input));
+	Error := TRUE;
+ELSE
+	Error := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_TestBasic">
+      <LineId Id="47" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TestBasic.OpcuaMonitor">
+      <LineId Id="5" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="23" Count="2" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

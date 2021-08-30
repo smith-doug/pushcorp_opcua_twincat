@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_FcuControl_out" Id="{e6c17fd3-ba52-4191-8025-634b8a6def0b}">
+    <Declaration><![CDATA[{attribute 'OPC.UA.DA.StructuredType' := '1'}
+TYPE ST_FcuControl_out :
+STRUCT
+	ActForce	: REAL;
+	ActPos	: REAL;
+	ActWeight	: REAL;
+	Contact	: BOOL;
+	WeightValid : BOOL;	
+	Error	: UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

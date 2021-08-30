@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_FCU_ControlMode" Id="{f252bdbd-98f8-4319-bb1a-ebd9a05a3666}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_FCU_ControlMode :
+(
+	Position := 0,
+	Force := 1,
+	SoftTouch := 3
+) WORD;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

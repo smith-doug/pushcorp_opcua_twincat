@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_TestBasicControl" Id="{eb9f7a78-09ab-47c9-9b30-473f177a43a2}">
+    <Declaration><![CDATA[TYPE ST_TestBasicControl :
+STRUCT
+	status	: ST_OpcuaStatus;	
+	input	: ST_TestBasicControl_in;	
+	
+	{attribute 'OPC.UA.DA.Access' := '1'}
+	output	: ST_TestBasicControl_out;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_FcuControl_in" Id="{1dddef50-05ce-4359-bc34-83b10d3957c6}">
+    <Declaration><![CDATA[{attribute 'OPC.UA.DA.StructuredType' := '1'}
+TYPE ST_FcuControl_in :
+STRUCT
+	SetForce	: REAL;
+	SetPosition	: REAL;
+	SetWeight	: REAL;
+	SetControlMode	: E_FCU_ControlMode := E_FCU_ControlMode.SoftTouch;
+	WeighPayloadNow	: BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

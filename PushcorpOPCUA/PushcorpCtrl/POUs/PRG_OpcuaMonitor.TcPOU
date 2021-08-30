@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="PRG_OpcuaMonitor" Id="{d8833ab7-3197-4713-a10b-d7af028115a9}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_OpcuaMonitor
+
+VAR_OUTPUT
+	Error : BOOL;	
+END_VAR
+VAR
+	fbFCUHb	: FB_HeartbeatMonitor;
+	fbSpindleHb	: FB_HeartbeatMonitor;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Error := FALSE;
+
+fbFCUHb(CLK:= GVL_opcua.stFcuControl.status.input.Heartbeat, T:= T#2.5S, Q=> );
+IF NOT fbFCUHb.Q THEN
+	// There's no way to simply disable the fcu.  
+	GVL_opcua.stFcuControl.input.SetControlMode := E_FCU_ControlMode.SoftTouch;
+	GVL_opcua.stFcuControl.input.SetForce := 0;	
+	Error := TRUE;
+ELSE
+	Error := FALSE;
+END_IF
+
+
+
+fbSpindleHb(CLK:= GVL_opcua.stSpindleControl.status.input.Heartbeat, T:= T#2.5S, Q=> );
+IF NOT fbSpindleHb.Q THEN
+	MEMSET(ADR(GVL_opcua.stSpindleControl.input), 0, SIZEOF(GVL_opcua.stSpindleControl.input));
+	Error := TRUE;
+ELSE
+	Error := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_OpcuaMonitor">
+      <LineId Id="16" Count="4" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="38" Count="1" />
+      <LineId Id="22" Count="7" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
