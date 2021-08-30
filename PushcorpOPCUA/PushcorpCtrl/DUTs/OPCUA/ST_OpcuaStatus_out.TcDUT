@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_OpcuaStatus_out" Id="{81130e64-9b3d-4217-8fac-5fcde4ee5916}">
+    <Declaration><![CDATA[TYPE ST_OpcuaStatus_out :
+STRUCT
+	Heartbeat	: BOOL;
+	Error	: UINT;	// 0 = No error
+	Connected	: BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

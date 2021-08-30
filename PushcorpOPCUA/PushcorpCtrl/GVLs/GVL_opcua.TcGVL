@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <GVL Name="GVL_io" Id="{ae38a59d-cc2b-48f0-8449-26f8526a5aee}">
+  <GVL Name="GVL_opcua" Id="{273b9490-171c-4ca8-b282-10eab17b1921}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	DI0 AT %I*	: BOOL;
-	DO0 AT %Q*	: BOOL;
 	
-	Spindle_Full	: ST_Spindle;
-	FCU_Full	: ST_FCUFLEX;
+	{attribute 'OPC.UA.DA' := '1'}
+	stSpindleControl	: ST_SpindleControl;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

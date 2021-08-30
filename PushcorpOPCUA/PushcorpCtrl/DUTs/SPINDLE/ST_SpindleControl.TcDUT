@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_SpindleControl" Id="{06a690f3-4ab1-4654-ab47-c229433ed0c7}">
+    <Declaration><![CDATA[{attribute 'OPC.UA.DA.StructuredType' := '1'}
+TYPE ST_SpindleControl :
+STRUCT
+	status	: ST_OpcuaStatus;
+	
+	input	: ST_SpindleControl_in;
+	
+	{attribute 'OPC.UA.DA.Access' := '1'}
+	output	: ST_SpindleControl_out;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

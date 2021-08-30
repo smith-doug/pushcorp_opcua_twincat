@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_FCUFLEX" Id="{2d91899e-4847-4804-924c-08515ee4cf32}">
+    <Declaration><![CDATA[{attribute 'pack_mode' := '2'}
+TYPE ST_FCUFLEX :
+STRUCT
+	DevState AT %I* : UINT;
+		
+	in AT %I* : ST_FCUFLEX_in;
+		
+	out AT %Q* : ST_FCUFLEX_out;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

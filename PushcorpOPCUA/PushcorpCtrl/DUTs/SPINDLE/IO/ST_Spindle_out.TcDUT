@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_Spindle_out" Id="{91265f13-14b5-46dd-977c-cfc1529a9586}">
+    <Declaration><![CDATA[TYPE ST_Spindle_out :
+STRUCT
+	flags	: ST_Spindle_out_bits;
+	SpindleSpeed	: INT;
+	Reserved	: INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

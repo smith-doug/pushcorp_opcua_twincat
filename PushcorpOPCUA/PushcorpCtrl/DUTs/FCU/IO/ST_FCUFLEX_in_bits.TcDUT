@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_FCUFLEX_in_bits" Id="{48194c8e-6727-4fcd-bce5-af3a68dc7199}">
+    <Declaration><![CDATA[TYPE ST_FCUFLEX_in_bits :
+STRUCT
+	hb : BIT;
+	Hostcomm : BIT;
+	ToolComm : BIT;
+	MetricUnits : BIT;
+	PosLimit : BIT;
+	NegLimit : BIT;
+	AtWeightPosition : BIT;
+	WeighInProgress : BIT;
+	WeightValid : BIT;
+	 {attribute 'hide'}
+	_reserved1 : BIT;
+	 {attribute 'hide'}
+	_reserved2 : BIT;
+	 {attribute 'hide'}
+	_reserved3 : BIT;
+	 {attribute 'hide'}
+	_reserved4 : BIT;
+	 {attribute 'hide'}
+	_reserved5 : BIT;
+	 {attribute 'hide'}
+	_reserved6 : BIT;
+	 {attribute 'hide'}
+	_reserved7 : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

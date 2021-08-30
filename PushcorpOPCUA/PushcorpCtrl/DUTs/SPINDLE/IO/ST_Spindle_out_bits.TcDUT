@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_Spindle_out_bits" Id="{ba3164a2-004d-44a6-abb5-56be47bb880a}">
+    <Declaration><![CDATA[{attribute 'pack_mode' := '2'}
+TYPE ST_Spindle_out_bits :
+STRUCT
+	ServoEnable	: BIT;
+	ResetFault	: BIT;
+	DO3	: BIT;
+	DO4	: BIT;
+	DO5	: BIT;
+	DO6	: BIT;
+	DO7	: BIT;
+	DO8	: BIT;	
+	Reserved	: BIT;	// Force 2 bytes, probably not needed
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

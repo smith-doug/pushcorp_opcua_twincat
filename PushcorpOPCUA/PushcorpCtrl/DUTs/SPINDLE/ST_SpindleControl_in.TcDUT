@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_SpindleControl_in" Id="{344cbbc8-1085-449b-9357-c5134c43baa2}">
+    <Declaration><![CDATA[{attribute 'OPC.UA.DA.StructuredType' := '1'}
+TYPE ST_SpindleControl_in :
+STRUCT
+	Execute	: BOOL;
+	(*{attribute 'OPC.UA.DA.AnalogItemType' := '1'}
+	{attribute 'OPC.UA.DA.AnalogItemType.EngineeringUnits' := '5059638'}
+	{attribute 'OPC.UA.DA.AnalogItemType.EURange' := '-15000.0:15000.0'}
+	{attribute 'OPC.UA.DA.AnalogItemType.WriteBehavior' := '1'}*)
+	SetVelo	: REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
