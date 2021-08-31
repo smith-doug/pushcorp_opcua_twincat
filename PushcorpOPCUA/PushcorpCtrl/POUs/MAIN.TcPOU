@@ -37,6 +37,7 @@ fbFcu(
 	data:= gvl_io.FCU_Full, 
 	ActForce=> fcu.output.ActForce, 
 	ActPos=> fcu.output.ActPos, 
+	ActWeight=> fcu.output.ActWeight,
 	Contact=> fcu.output.Contact,
 	WeightValid=> fcu.output.WeightValid, 
 	Error=> fcu.output.Error);
@@ -52,7 +53,9 @@ GVL_opcua.stTestBasic.output.DI0 := GVL_io.DI0;]]></ST>
       <LineId Id="52" Count="0" />
       <LineId Id="17" Count="7" />
       <LineId Id="55" Count="0" />
-      <LineId Id="25" Count="11" />
+      <LineId Id="25" Count="9" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="35" Count="1" />
       <LineId Id="15" Count="0" />
       <LineId Id="58" Count="1" />
       <LineId Id="61" Count="0" />
