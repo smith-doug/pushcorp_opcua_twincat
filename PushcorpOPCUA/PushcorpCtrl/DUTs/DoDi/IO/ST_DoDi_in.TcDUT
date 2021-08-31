@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_DoDi_in" Id="{813f21c8-55bf-40c1-bc11-786def6f8592}">
+    <Declaration><![CDATA[TYPE ST_DoDi_in :
+STRUCT
+	DI0	AT %I*	: BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

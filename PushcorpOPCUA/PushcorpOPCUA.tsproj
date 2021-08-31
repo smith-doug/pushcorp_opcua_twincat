@@ -626,7 +626,7 @@
 					<Pnp>
 						<DeviceDesc>X000 (X000)</DeviceDesc>
 						<DeviceName>\DEVICE\{470463E2-C1F5-4D46-A45E-D2329C797A5A}</DeviceName>
-						<DeviceData>000000000000</DeviceData>
+						<DeviceData>00010555c573</DeviceData>
 					</Pnp>
 				</AddressInfo>
 				<Image Id="3" AddrType="1" ImageType="3">
@@ -645,7 +645,7 @@ C:\TwinCAT\3.1\Config\Io\EtherNetIP\
 					<Vars VarGrpType="1">
 						<Name>Inputs</Name>
 						<Var>
-							<Name>State</Name>
+							<Name>GVL_io.FCU_Full.DevState</Name>
 							<Comment><![CDATA[0x8000 = Remote Node has no connections
 0x4000 = Remote Node is not reachable
 0x2000 = TCP Client: initialization failed
@@ -767,7 +767,7 @@ C:\TwinCAT\3.1\Config\Io\EtherNetIP\
 				<Link VarA="PlcTask Outputs^GVL_io.DO0" VarB="Channel 1^GVL_io.DO0"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (TC3 EIP Scanner)^FCU (EtherNet/IP Slave (generic))">
-				<Link VarA="PlcTask Inputs^GVL_io.FCU_Full.DevState" VarB="Inputs^State"/>
+				<Link VarA="PlcTask Inputs^GVL_io.FCU_Full.DevState" VarB="Inputs^GVL_io.FCU_Full.DevState"/>
 				<Link VarA="PlcTask Inputs^GVL_io.FCU_Full.in" VarB="FCU IO^Inputs^GVL_io.FCU_Full.in"/>
 				<Link VarA="PlcTask Outputs^GVL_io.FCU_Full.out" VarB="FCU IO^Outputs^GVL_io.FCU_Full.out"/>
 			</OwnerB>

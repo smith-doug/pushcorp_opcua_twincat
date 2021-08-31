@@ -15,12 +15,16 @@
     <Implicit_KindOfTask>{a7e2e861-96fc-4307-9cd6-2ec778671457}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{9d2d381e-591f-4f04-9cb4-636cf2447363}</Implicit_Jitter_Distribution>
     <LibraryReferences>{3b86a8ad-c22f-4af4-9d7a-1069c337270b}</LibraryReferences>
+    <Released>false</Released>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DUTs\DoDi\IO\ST_DoDi.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\DoDi\IO\ST_DoDi_in.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DoDi\IO\ST_DoDi_out.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\FCU\E_FCU_ControlMode.TcDUT">
@@ -145,6 +149,10 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_EventLogger">
+      <DefaultResolution>Tc3_EventLogger, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_EventLogger</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
