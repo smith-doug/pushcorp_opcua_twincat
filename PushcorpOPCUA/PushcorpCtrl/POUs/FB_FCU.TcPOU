@@ -75,25 +75,33 @@ VAR_OUTPUT
 END_VAR
 VAR_INST
 	fbHbMonitor	: FB_HeartbeatMonitor;
-	fbBlink	: BLINK;
+	fbBlink	: BLINK;	
+	err	: U_OpcuaError;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbHbMonitor(IN:= OpcuaData.status.input.Heartbeat, PT:= T#2.5S, Q=> );
-
+err.Value := 0;
 IF NOT fbHbMonitor.Q THEN
 	// There's no way to simply disable the fcu and it defaults to position mode.  Trying to move to position 0
 	// will cause a significant force
 	OpcuaData.input.SetControlMode := E_FCU_ControlMode.SoftTouch;
 	OpcuaData.input.SetForce := 0;
 	OpcuaData.input.WeighPayloadNow := FALSE;
-	Error := TRUE;
-ELSE
-	Error := FALSE;
+	
+	err.Bits.ClientHbLost := TRUE;
 END_IF
 
+OpcuaData.status.output.Connected := (THIS^.uiDevState = 0);
+IF NOT OpcuaData.status.output.Connected THEN	// higher priority
+	err.Bits.DevDisconnected := TRUE;	
+END_IF
+
+Error := err.Value <> 0;
+OpcuaData.status.output.Error := err.Value;
+
 fbBlink(ENABLE:= TRUE, TIMELOW:= T#500MS, TIMEHIGH:= T#500MS, OUT=> OpcuaData.status.output.Heartbeat);
-OpcuaData.status.output.Connected := (THIS^.uiDevState = 0);]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_FCU">
@@ -124,8 +132,20 @@ OpcuaData.status.output.Connected := (THIS^.uiDevState = 0);]]></ST>
       <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_FCU.OpcuaMonitor">
-      <LineId Id="83" Count="13" />
-      <LineId Id="69" Count="0" />
+      <LineId Id="83" Count="7" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="119" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="136" Count="1" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="110" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

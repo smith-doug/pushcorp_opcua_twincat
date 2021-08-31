@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_OpcuaStatusError" Id="{9a849d96-c778-4d85-88aa-924af9b94cb0}">
+    <Declaration><![CDATA[TYPE ST_OpcuaStatusError :
+STRUCT
+	DevDisconnected	: BIT;
+	ClientHbLost	: BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

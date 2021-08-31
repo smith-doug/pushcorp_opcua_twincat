@@ -54,10 +54,16 @@
     <Compile Include="DUTs\OPCUA\ST_OpcuaStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\OPCUA\ST_OpcuaStatusError.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\OPCUA\ST_OpcuaStatus_in.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\OPCUA\ST_OpcuaStatus_out.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OPCUA\U_OpcuaError.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\SPINDLE\IO\ST_Spindle.TcDUT">
