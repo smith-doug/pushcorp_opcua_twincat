@@ -7,7 +7,7 @@ STRUCT
 	CommandForce : INT;
 	CommandPosition : WORD;
 	PayloadWeight : WORD;
-	ControlMode : WORD;
+	ControlMode : WORD := 3;	// SoftTouch
 	WeighPayloadNow : WORD;
 END_STRUCT
 END_TYPE

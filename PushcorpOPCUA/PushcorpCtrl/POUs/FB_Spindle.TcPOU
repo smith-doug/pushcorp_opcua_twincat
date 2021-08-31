@@ -20,12 +20,16 @@ VAR
 	iState	: DINT;	
 	fbDelay	: TON;
 	bRunDelay	: BOOL;
+	uiDevState: UINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT Enable THEN
 	iState := 0;
 END_IF
+
+uiDevState := data.DevState;
+
 // Scale target rpm
 rTargetVel := SCALE_R(
 				X:= SetVelo, 
@@ -95,28 +99,35 @@ END_IF
 VAR_INPUT
 END_VAR
 VAR_IN_OUT
-	Data	: ST_SpindleControl;
+	OpcuaData	: ST_SpindleControl;
 END_VAR
 VAR_OUTPUT
 	Error	: BOOL;
 END_VAR
 VAR_INST
 	fbHbMonitor	: FB_HeartbeatMonitor;
+	fbBlink	: BLINK;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbHbMonitor(CLK:= Data.status.input.Heartbeat, PT:= T#2.5S, Q=> );
+        <ST><![CDATA[fbHbMonitor(IN:= OpcuaData.status.input.Heartbeat, PT:= T#2.5S, Q=> );
 
 IF NOT fbHbMonitor.Q THEN
-	MEMSET(ADR(Data.input), 0, SIZEOF(Data.input));
+	MEMSET(ADR(OpcuaData.input), 0, SIZEOF(OpcuaData.input));
 	Error := TRUE;
 ELSE
 	Error := FALSE;
-END_IF]]></ST>
+END_IF
+
+fbBlink(ENABLE:= TRUE, TIMELOW:= T#500MS, TIMEHIGH:= T#500MS, OUT=> OpcuaData.status.output.Heartbeat);
+OpcuaData.status.output.Connected := (THIS^.uiDevState = 0);]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_Spindle">
       <LineId Id="100" Count="2" />
+      <LineId Id="223" Count="0" />
+      <LineId Id="222" Count="0" />
+      <LineId Id="224" Count="0" />
       <LineId Id="122" Count="5" />
       <LineId Id="121" Count="0" />
       <LineId Id="128" Count="1" />
@@ -162,11 +173,8 @@ END_IF]]></ST>
       <LineId Id="47" Count="0" />
     </LineIds>
     <LineIds Name="FB_Spindle.OpcuaMonitor">
-      <LineId Id="5" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="16" Count="1" />
-      <LineId Id="23" Count="2" />
-      <LineId Id="18" Count="0" />
+      <LineId Id="68" Count="9" />
+      <LineId Id="54" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

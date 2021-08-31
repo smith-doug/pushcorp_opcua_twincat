@@ -17,7 +17,7 @@ spin REF= GVL_opcua.stSpindleControl;
 fcu REF=GVL_opcua.stFcuControl;
 
 // Monitor opcua heartbeat data in a Method for convenience.  This can be easily ignored if calling the FB without opcua 
-fbSpindle.OpcuaMonitor(Data:= spin, Error=> );
+fbSpindle.OpcuaMonitor(OpcuaData:= spin, Error=> );
 fbSpindle(
 	Enable:= spin.input.Execute, 
 	SetVelo:= spin.input.SetVelo, 
@@ -27,7 +27,7 @@ fbSpindle(
 	Error=> spin.output.Error);
 
 
-fbFcu.OpcuaMonitor(Data:= fcu, Error=> );
+fbFcu.OpcuaMonitor(OpcuaData:= fcu, Error=> );
 fbFcu(
 	SetForce:= fcu.input.SetForce, 
 	SetPosition:= fcu.input.SetPosition, 
