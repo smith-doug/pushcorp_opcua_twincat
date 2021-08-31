@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcUaAcConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ConditionController Name="Condition Controller">
+    <Condition Name="iTest" Severity="500">
+      <LimitAlarmType LowLowLimit="0" LowLimit="0" HighLimit="10" HighHighLimit="0" MessageNormal="0" MessageLowLow="0" MessageLow="0" MessageHigh="0" MessageHighHigh="0" />
+      <ItemToMonitor SamplingRate="50" NS="urn:BeckhoffAutomation:Ua:PLC1" NodeId="s=GVL_opcua.iTest" />
+    </Condition>
+  </ConditionController>
+</TcUaAcConfig>
