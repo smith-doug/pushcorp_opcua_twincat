@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_Motoman" Id="{f0e824e6-1ba2-42aa-8455-a018b9e41f37}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Motoman
+VAR_INPUT
+	EnableJoystick	: BOOL;
+	Value_1	: REAL;
+	Value_2	: REAL;
+	Value_3	: REAL;
+	Value_4	: REAL;
+	Value_5	: REAL;
+	Value_6	: REAL;	
+END_VAR
+VAR_IN_OUT
+	data	: ST_MotomanIO;	// Raw data from Ethernet/IP
+END_VAR
+VAR_OUTPUT	
+	Error	: UINT;	// 
+END_VAR
+VAR
+	uiDevState: UINT;
+	bOk	: BOOL;	
+	fbHbTimeout	: TON;
+	
+	rMaxOutVel : REAL := 1000;
+
+	
+	
+	pInt	: POINTER TO INT;
+	pWord	: POINTER TO WORD;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[uiDevState := data.DevState;
+// Check comms and heartbeat
+bOk := TRUE;	
+
+
+(*valTemp := LIMIT(-0.6, Value_1, 0.6);
+
+tempLin := F_LIN2(
+	X:= valTemp, 
+	X1:= -0.6, 
+	Y1:= -1000, 
+	X2:= 0.6, 
+	Y2:= 1000);
+	
+tempInt := TO_INT(tempLin);
+
+MEMMOVE(ADR(data.out.Vals[0]), ADR(tempInt), 2);
+//data.out.Vals[0] := tempInt;
+*)
+
+data.out.Vals[0] := PrepareValue(Value_1, rMaxOutVel);
+data.out.Vals[1] := PrepareValue(Value_2, rMaxOutVel);
+data.out.Vals[2] := PrepareValue(Value_3, rMaxOutVel);
+
+data.out.Cmd.0 := EnableJoystick;
+
+data.out.Cmd.1 := data.out.Vals[0] <> 0 OR data.out.Vals[1] <> 0 OR data.out.Vals[2] <> 0;
+
+IF NOT EnableJoystick THEN 
+	MEMSET(ADR(data.out.Cmd), 0, SIZEOF(data.out.Cmd));
+	MEMSET(ADR(data.out.Vals), 0, SIZEOF(data.out.Vals));
+END_IF
+Error := TO_UINT(NOT bOk);]]></ST>
+    </Implementation>
+    <Method Name="OpcuaMonitor" Id="{bc6c407a-71a6-4ae1-8104-4f4653015ad1}">
+      <Declaration><![CDATA[METHOD OpcuaMonitor : BOOL
+VAR_INPUT
+END_VAR
+VAR_IN_OUT
+	OpcuaData	: ST_MotomanCtrl;
+END_VAR
+VAR_OUTPUT
+	Error	: BOOL;
+END_VAR
+VAR_INST
+	fbHbMonitor	: FB_HeartbeatMonitor;
+	fbBlink	: BLINK;	
+	err	: U_OpcuaError;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbHbMonitor(IN:= OpcuaData.status.input.Heartbeat, PT:= T#2.5S, Q=> );
+
+IF NOT fbHbMonitor.Q THEN
+	MEMSET(ADR(OpcuaData.input), 0, SIZEOF(OpcuaData.input));
+	Error := TRUE;
+ELSE
+	Error := FALSE;
+END_IF
+
+fbBlink(ENABLE:= TRUE, TIMELOW:= T#500MS, TIMEHIGH:= T#500MS, OUT=> OpcuaData.status.output.Heartbeat);
+OpcuaData.status.output.Connected := (THIS^.uiDevState = 0);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PrepareValue" Id="{751eced9-0b6c-4df8-9c73-23da03a5d54e}">
+      <Declaration><![CDATA[METHOD PrepareValue : INT
+VAR_INPUT
+	SetVal	: REAL;
+	MaxOut	: REAL := 1000;
+END_VAR
+VAR
+	tempWord: WORD;
+	tempInt	: INT;
+	valTemp: REAL;
+	tempLin: REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[valTemp := LIMIT(-0.6, SetVal, 0.6);
+
+tempLin := F_LIN2(
+	X:= valTemp, 
+	X1:= -0.6, 
+	Y1:= -MaxOut, 
+	X2:= 0.6, 
+	Y2:= MaxOut);
+	
+tempInt := TO_INT(tempLin);
+
+MEMMOVE(ADR(PrepareValue), ADR(tempInt), 2);]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Motoman">
+      <LineId Id="225" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="263" Count="0" />
+      <LineId Id="265" Count="0" />
+      <LineId Id="282" Count="0" />
+      <LineId Id="286" Count="0" />
+      <LineId Id="277" Count="4" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="288" Count="1" />
+      <LineId Id="301" Count="0" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="302" Count="0" />
+      <LineId Id="304" Count="0" />
+      <LineId Id="303" Count="0" />
+      <LineId Id="306" Count="0" />
+      <LineId Id="309" Count="0" />
+      <LineId Id="305" Count="0" />
+      <LineId Id="296" Count="0" />
+      <LineId Id="308" Count="0" />
+      <LineId Id="307" Count="0" />
+      <LineId Id="292" Count="3" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="40" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Motoman.OpcuaMonitor">
+      <LineId Id="153" Count="9" />
+      <LineId Id="110" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Motoman.PrepareValue">
+      <LineId Id="7" Count="10" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

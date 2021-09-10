@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_MotomanCtrl" Id="{92403a76-67dd-4a3d-934b-8d8ee5e6200a}">
+    <Declaration><![CDATA[TYPE ST_MotomanCtrl :
+STRUCT
+	status	: ST_OpcuaStatus;
+	
+	input	: ST_MotomanCtrl_in;	
+	
+	{attribute 'OPC.UA.DA.Access' := '1'}
+	output	: ST_MotomanCtrl_out;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

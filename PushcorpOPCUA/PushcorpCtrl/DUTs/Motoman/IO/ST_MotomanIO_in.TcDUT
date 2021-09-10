@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_MotomanIO_in" Id="{c2ffaaf1-748a-438c-bc47-21880afabeef}">
+    <Declaration><![CDATA[TYPE ST_MotomanIO_in :
+STRUCT
+	data	: ARRAY[0..63] OF BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

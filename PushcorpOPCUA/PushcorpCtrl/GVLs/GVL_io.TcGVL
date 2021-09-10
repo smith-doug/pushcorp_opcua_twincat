@@ -12,6 +12,8 @@ VAR_GLOBAL
 	
 	DX200_in AT %I*	: ARRAY [0..7] OF BYTE;
 	DX200_out AT %Q*	: ARRAY [0..7] OF BYTE;
+	
+	Motoman_Full	: ST_MotomanIO;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

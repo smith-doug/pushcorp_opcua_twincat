@@ -5,20 +5,23 @@
 VAR
 	fbSpindle	: FB_Spindle;
 	fbFcu	: FB_FCU;
+	fbMotoman	: FB_Motoman;
 	
 	
 	spin: REFERENCE TO ST_SpindleControl;
 	fcu: REFERENCE TO ST_FcuControl;
 	
-
+	motoman	: REFERENCE TO ST_MotomanCtrl;
+	motomanErr: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[prgMotoman();
+      <ST><![CDATA[//prgMotoman();
 
 // Set ref vars for convenience of shorter names 
 spin REF= GVL_opcua.stSpindleControl;
 fcu REF=GVL_opcua.stFcuControl;
+motoman REF= GVL_opcua.stMotomanControl;
 
 // Monitor opcua heartbeat data in a Method for convenience.  This can be easily ignored if calling the FB without opcua 
 fbSpindle.OpcuaMonitor(OpcuaData:= spin, Error=> );
@@ -46,6 +49,18 @@ fbFcu(
 	WeightValid=> fcu.output.WeightValid, 
 	Error=> fcu.output.Error);
 	
+fbMotoman.OpcuaMonitor(OpcuaData:= GVL_opcua.stMotomanControl, Error=> motomanErr);
+fbMotoman(
+	EnableJoystick:= NOT motomanErr, 
+	Value_1:= motoman.input.Value_1, 
+	Value_2:= motoman.input.Value_2, 
+	Value_3:= motoman.input.Value_3, 
+	Value_4:= , 
+	Value_5:= , 
+	Value_6:= , 
+	data:= GVL_io.Motoman_Full, 
+	Error=> );
+	
 // DI0 := DO0, for testing
 GVL_io.DO0 := GVL_opcua.stTestBasic.input.DO0;
 GVL_opcua.stTestBasic.output.DI0 := GVL_io.DI0;]]></ST>
@@ -55,6 +70,7 @@ GVL_opcua.stTestBasic.output.DI0 := GVL_io.DI0;]]></ST>
       <LineId Id="88" Count="0" />
       <LineId Id="62" Count="1" />
       <LineId Id="57" Count="0" />
+      <LineId Id="101" Count="0" />
       <LineId Id="53" Count="1" />
       <LineId Id="52" Count="0" />
       <LineId Id="17" Count="7" />
@@ -63,6 +79,10 @@ GVL_opcua.stTestBasic.output.DI0 := GVL_io.DI0;]]></ST>
       <LineId Id="73" Count="0" />
       <LineId Id="35" Count="1" />
       <LineId Id="15" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="104" Count="8" />
+      <LineId Id="103" Count="0" />
       <LineId Id="58" Count="1" />
       <LineId Id="61" Count="0" />
       <LineId Id="60" Count="0" />

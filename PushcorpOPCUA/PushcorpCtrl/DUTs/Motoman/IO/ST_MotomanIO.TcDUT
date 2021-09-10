@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_MotomanIO" Id="{69483d13-ed16-4d21-ae89-867d9b070465}">
+    <Declaration><![CDATA[TYPE ST_MotomanIO :
+STRUCT
+	DevState AT %I* : UINT;
+		
+	in AT %I* : ST_MotomanIO_in;
+		
+	out AT %Q* : ST_MotomanIO_out;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

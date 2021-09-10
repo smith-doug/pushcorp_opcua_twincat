@@ -51,6 +51,24 @@
     <Compile Include="DUTs\FCU\ST_FcuControl_out.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Motoman\IO\ST_MotomanIO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Motoman\IO\ST_MotomanIO_in.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Motoman\IO\ST_MotomanIO_out.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Motoman\ST_MotomanCtrl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Motoman\ST_MotomanCtrl_in.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Motoman\ST_MotomanCtrl_out.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\OPCUA\ST_OpcuaStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -116,6 +134,9 @@
     <Compile Include="POUs\FB_FCU.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FB_Motoman.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FB_HeartbeatMonitor.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -141,6 +162,8 @@
     <Folder Include="DUTs\FCU" />
     <Folder Include="DUTs\FCU\IO" />
     <Folder Include="DUTs\DoDi" />
+    <Folder Include="DUTs\Motoman" />
+    <Folder Include="DUTs\Motoman\IO" />
     <Folder Include="DUTs\OPCUA" />
     <Folder Include="DUTs\SPINDLE" />
     <Folder Include="DUTs\SPINDLE\IO" />

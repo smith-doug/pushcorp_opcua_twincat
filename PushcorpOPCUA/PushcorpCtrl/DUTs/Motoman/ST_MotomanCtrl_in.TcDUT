@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_MotomanCtrl_in" Id="{089403ff-c865-4bd5-ba1f-37c61fcc1786}">
+    <Declaration><![CDATA[TYPE ST_MotomanCtrl_in :
+STRUCT
+	EnableJoystick	: BOOL;
+	Value_1	: REAL;
+	Value_2	: REAL;
+	Value_3	: REAL;
+	Value_4	: REAL;
+	Value_5	: REAL;
+	Value_6	: REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
