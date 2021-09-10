@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="prgMotoman" Id="{795888a1-935f-43c3-9692-0fc7a23d57bd}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM prgMotoman
+VAR
+	pReal	: POINTER TO REAL;
+	rVal	: REAL;
+	
+	pInt	: POINTER TO INT;
+	iVal	: INT;
+	
+	fbsin	: BASIC.GEN_SIN;
+	rSinOut: REAL;
+	
+	pRun	: POINTER TO BOOL;
+	bRun	: BOOL;
+	
+	bUpdate: BOOL;
+	
+	bRunning : BOOL;
+	
+	fbTimer	: TOF;
+	
+	iCycles	: DINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[pReal := ADR(GVL_io.DX200_out[0]);
+//pReal^ := rVal;
+
+pInt := ADR(GVL_io.DX200_out[4]);
+//pInt^ := iVal;
+
+pRun := ADR(GVL_io.DX200_out[0]);
+pRun^ := bRun;
+
+bRunning := GVL_io.DX200_in[0].0;
+
+fbsin(
+	PT:= T#5S, 
+	AM:= 2000, 
+	OS:= , 
+	DL:= , 
+	Q=> , 
+	Out=> rSinOut);
+	
+IF rSinOut >= 100 THEN
+	rSinOut := 100;
+ELSIF rSinOut <= -100 THEN
+	rSinOut := -100;
+END_IF
+	
+IF bUpdate THEN
+	pInt^ := TO_INT(rSinOut);
+	iCycles := 0;
+ELSE
+	bRun := FALSE;
+	pInt^ := 0;	
+	IF bRunning THEN
+		iCycles := iCycles + 1;
+	END_IF
+END_IF
+
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="prgMotoman">
+      <LineId Id="6" Count="4" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="20" Count="5" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="60" Count="2" />
+      <LineId Id="64" Count="1" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="34" Count="2" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="56" Count="2" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="51" Count="2" />
+      <LineId Id="49" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

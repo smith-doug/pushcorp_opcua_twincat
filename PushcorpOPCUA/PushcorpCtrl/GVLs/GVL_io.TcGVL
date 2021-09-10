@@ -8,6 +8,10 @@ VAR_GLOBAL
 	
 	Spindle_Full	: ST_Spindle;
 	FCU_Full	: ST_FCUFLEX;
+	
+	
+	DX200_in AT %I*	: ARRAY [0..7] OF BYTE;
+	DX200_out AT %Q*	: ARRAY [0..7] OF BYTE;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

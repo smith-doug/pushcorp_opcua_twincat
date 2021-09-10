@@ -9,10 +9,14 @@ VAR
 	
 	spin: REFERENCE TO ST_SpindleControl;
 	fcu: REFERENCE TO ST_FcuControl;
+	
+
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Set ref vars for convenience of shorter names 
+      <ST><![CDATA[prgMotoman();
+
+// Set ref vars for convenience of shorter names 
 spin REF= GVL_opcua.stSpindleControl;
 fcu REF=GVL_opcua.stFcuControl;
 
@@ -47,6 +51,8 @@ GVL_io.DO0 := GVL_opcua.stTestBasic.input.DO0;
 GVL_opcua.stTestBasic.output.DI0 := GVL_io.DI0;]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
+      <LineId Id="85" Count="0" />
+      <LineId Id="88" Count="0" />
       <LineId Id="62" Count="1" />
       <LineId Id="57" Count="0" />
       <LineId Id="53" Count="1" />
