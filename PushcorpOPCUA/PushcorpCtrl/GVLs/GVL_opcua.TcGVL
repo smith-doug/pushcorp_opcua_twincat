@@ -13,7 +13,7 @@ VAR_GLOBAL
 	stTestBasic	: ST_TestBasicControl;
 	
 	{attribute 'OPC.UA.DA' := '1'}	
-	stMotomanControl	: ST_MotomanCtrl;
+	stMotomanControl	: ST_MotomanCtrl;	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

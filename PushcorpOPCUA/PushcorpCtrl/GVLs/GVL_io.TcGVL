@@ -3,8 +3,9 @@
   <GVL Name="GVL_io" Id="{ae38a59d-cc2b-48f0-8449-26f8526a5aee}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	DI0 AT %I*	: BOOL;
-	DO0 AT %Q*	: BOOL;
+	DI_0 AT %I*	: BOOL;
+	DI_1 AT %I*	: BOOL;
+	DO_0 AT %Q*	: BOOL;
 	
 	Spindle_Full	: ST_Spindle;
 	FCU_Full	: ST_FCUFLEX;

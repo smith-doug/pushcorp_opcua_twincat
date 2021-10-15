@@ -3,11 +3,12 @@
   <DUT Name="ST_TestBasicControl_in" Id="{7eefbe44-ea91-47fa-8b43-53e6efe9097a}">
     <Declaration><![CDATA[TYPE ST_TestBasicControl_in :
 STRUCT
+	arrTest	: ARRAY[0..10] OF DINT;
 	DO0	: BOOL;
 	in1	: DINT;
 	int2	: DINT;
 	stSub1In	: ST_TestBasicControl_sub1; 
-	inStr1	: STRING(255);
+	inStr1	: STRING(255);	
 END_STRUCT
 END_TYPE
 ]]></Declaration>
