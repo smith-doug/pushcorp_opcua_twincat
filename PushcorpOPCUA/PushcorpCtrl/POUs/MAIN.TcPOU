@@ -24,7 +24,7 @@ fcu REF=GVL_opcua.stFcuControl;
 motoman REF= GVL_opcua.stMotomanControl;
 
 //************* This section for tuesday demo
-
+(*
 spin.input.SetVelo := 1000;
 spin.input.Execute := GVL_io.DI_0;
 spin.status.input.Heartbeat := NOT spin.status.input.Heartbeat; 
@@ -34,7 +34,7 @@ fcu.input.WeighPayloadNow := gvl_io.DI_1;
 fcu.input.SetForce := -90;
 
 fcu.status.input.Heartbeat := NOT fcu.status.input.Heartbeat;
-
+*)
 //**************
 
 // Monitor opcua heartbeat data in a Method for convenience.  This can be easily ignored if calling the FB without opcua 
